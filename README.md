@@ -2,13 +2,13 @@
 
 ![Sample Figure](graphic_abstract.png)
 
-### Darlene Nabila Zetta[<a href="#aff1">†</a>], Watshara Shoombuatong[<a href="#aff2">‡</a>], and Tarapong Srisongkram[<a href="#aff3">*</a>]
+### Darlene Nabila Zetta†, Watshara Shoombuatong‡, and Tarapong Srisongkram*
 
-<a name="aff1">[†]</a> Graduate School in the Program of Pharmaceutical Sciences, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (darlenenabilazetta.d@kkumail.com)
+†Graduate School in the Program of Pharmaceutical Sciences, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (darlenenabilazetta.d@kkumail.com)
 
-<a name="aff2">[‡]</a> Center for Research Innovation and Biomedical Informatics, Faculty of Medical Technology, Mahidol University, Bangkok, 10700, Thailand. (watshara.sho@mahidol.ac.th)
+‡Center for Research Innovation and Biomedical Informatics, Faculty of Medical Technology, Mahidol University, Bangkok, 10700, Thailand. (watshara.sho@mahidol.ac.th)
 
-<a name="aff3">[*]</a> Division of Pharmaceutical Chemistry, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (tarasri@kku.ac.th)
+*Division of Pharmaceutical Chemistry, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (tarasri@kku.ac.th)
 
 Full paper submitted in **Journal of Chemical Information and Modeling**.
 
