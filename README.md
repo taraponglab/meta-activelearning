@@ -24,14 +24,14 @@ Full paper submitted in **ACS Omega**.
 - [MIT License](#mit-license)
 
 ### Overview
-This repository implements [Active Stack-Deep Learning] with Strategic Sampling for [Small and Imbalance Chemical Toxicity Prediction]. The pipeline includes:
+This repository implements Active Stack-Deep Learning with Strategic Sampling for Small and Imbalance Chemical Toxicity Prediction. The pipeline includes:
 - Data preprocessing
 - Feature extraction
 - Model training
 - Performance evaluation
 
 ### Requirements
-- Python >= 3.8
+- Python >= 3.8 or above
 - Install dependencies from `requirements.txt`:
   ```bash
   pip install -r requirements.txt
