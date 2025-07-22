@@ -53,7 +53,7 @@ To preprocess the data, run:
 ```bash
 python preprocess.py
 ```
-### Features Extraction
+### 🔑 Features Extraction
 The features extraction of twelve fingerprints calculated with python file: The extraction of twelve molecular fingerprints is performed using the following script:
 
 python calculate_fp.py
