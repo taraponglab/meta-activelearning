@@ -32,7 +32,6 @@ This repository implements Active Stack-Deep Learning with Strategic Sampling fo
 
 
 ### Requirements
-- Python >= 3.8 or above
 - Install dependencies from `requirements.txt`:
   ```bash
   pip install -r requirements.txt
