@@ -15,13 +15,13 @@ Full paper submitted in **ACS Omega**.
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Data Preparation](#data-preparation)
-- [Features Extraction](#features-extraction)
-- [Training and Evaluate the Model](#training-the-model)
-- [Reproducing Results](#reproducing-results)
-- [MIT License](#mit-license)
+- [📖 Overview](#overview)
+- [🧰 Requirements](#requirements)
+- [📂 Data Preparation](#data-preparation)
+- [🔑 Features Extraction](#features-extraction)
+- [📈 Training and Evaluate the Model](#training-the-model)
+- [🔁 Reproducing Results](#reproducing-results)
+- [📄 MIT License](#mit-license)
 
 
 ### 📖 Overview
