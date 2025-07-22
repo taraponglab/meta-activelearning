@@ -1,4 +1,4 @@
-# **Active Meta-Deep Learning with Strategic Sampling for Small and Imbalance Chemical Toxicity Prediciton**
+# **Active Stack-Deep Learning with Strategic Sampling for Small and Imbalance Chemical Toxicity Prediciton**
 
 ![Sample Figure](graphic_abstract.png)
 
