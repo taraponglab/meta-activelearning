@@ -12,6 +12,7 @@
 
 Full paper submitted in **ACS Omega**.
 
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -22,12 +23,14 @@ Full paper submitted in **ACS Omega**.
 - [Reproducing Results](#reproducing-results)
 - [MIT License](#mit-license)
 
+
 ### 📖 Overview
 This repository implements Active Stack-Deep Learning with Strategic Sampling for Small and Imbalance Chemical Toxicity Prediction. The pipeline includes:
 - Data preprocessing
 - Feature extraction
 - Model training
 - Performance evaluation
+
 
 ### 🧰 Requirements
 - Python >= 3.8 or above
@@ -36,6 +39,7 @@ This repository implements Active Stack-Deep Learning with Strategic Sampling fo
   pip install -r requirements.txt
 - Install the required packages:
 ```pip install -r requirements.txt```
+
 
 ### 📂 Data Preparation
 The `data/` directory is organized as follows:
@@ -53,12 +57,15 @@ To preprocess the data, run:
 ```bash
 python preprocess.py
 ```
+
+
 ### 🔑 Features Extraction
 The features extraction of twelve fingerprints calculated with python file: The extraction of twelve molecular fingerprints is performed using the following script:
 
 python calculate_fp.py
 
 This script is supported by the `fingerprints_xml/` folder, which contains the necessary fingerprint definitions.
+
 
 ### 📈 Training and Evaluate the Model
 The training and evaluation process using the processed data includes the following steps:
@@ -102,6 +109,7 @@ This script separates the remaining pool data into a new folder for the next ite
 
 Repeat the steps above for each active learning iteration until the desired number of compounds or performance is achieved.
 
+
 ### 🔁 Reproducing Results
 To reproduce the results reported in the paper:
 
@@ -110,6 +118,7 @@ To reproduce the results reported in the paper:
 2. Run the training and evaluation scripts in sequence as described above.
 
 3. The outputs and evaluation results will be saved in the specified folders.
+
 
 ### 📄 MIT License
 Copyright (c) [2025] [Dr.Tarapong Srisongram]
