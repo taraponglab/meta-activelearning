@@ -10,7 +10,20 @@
 
 *Division of Pharmaceutical Chemistry, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (tarasri@kku.ac.th)
 
-Full paper submitted in **Journal of Chemical Information and Modeling**.
+Full paper submitted in **ACS Omega**.
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Setup Instructions](#setup-instructions)
+- [Data Preparation](#data-preparation)
+- [Training the Model](#training-the-model)
+- [Evaluation](#evaluation)
+- [Reproducing Results](#reproducing-results)
+- [Citation](#citation)
+- [MIT License](#mit-license)
+
 
 ### MIT License
 Copyright (c) [2025] [Dr.Tarapong Srisongram]
