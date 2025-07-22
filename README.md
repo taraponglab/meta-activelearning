@@ -4,11 +4,11 @@
 
 ### Darlene Nabila Zetta†, Watshara Shoombuatong‡, and Tarapong Srisongkram*
 
-†Graduate School in the Program of Pharmaceutical Sciences, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (darlenenabilazetta.d@kkumail.com)
+†Graduate School in the Program of Pharmaceutical Sciences, Faculty of Pharmaceutical Sciences, Khon Kaen University, Khon Kaen, 40002, Thailand. (darlenenabilazetta.d@kkumail.com)
 
 ‡Center for Research Innovation and Biomedical Informatics, Faculty of Medical Technology, Mahidol University, Bangkok, 10700, Thailand. (watshara.sho@mahidol.ac.th)
 
-*Division of Pharmaceutical Chemistry, Faculty of Pharmaceutical Sciences, Khon Kaen University, Thailand. (tarasri@kku.ac.th)
+*Division of Pharmaceutical Chemistry, Faculty of Pharmaceutical Sciences, Khon Kaen University, Khon Kaen, 40002, Thailand. (tarasri@kku.ac.th)
 
 Full paper submitted in **ACS Omega**.
 
@@ -16,39 +16,28 @@ Full paper submitted in **ACS Omega**.
 
 - [Overview](#overview)
 - [Requirements](#requirements)
-- [Setup Instructions](#setup-instructions)
 - [Data Preparation](#data-preparation)
 - [Features Extraction](#features-extraction)
 - [Training and Evaluate the Model](#training-the-model)
 - [Reproducing Results](#reproducing-results)
 - [MIT License](#mit-license)
 
-### Overview
+### 📖 Overview
 This repository implements Active Stack-Deep Learning with Strategic Sampling for Small and Imbalance Chemical Toxicity Prediction. The pipeline includes:
 - Data preprocessing
 - Feature extraction
 - Model training
 - Performance evaluation
 
-### Requirements
+### 🧰 Requirements
 - Python >= 3.8 or above
 - Install dependencies from `requirements.txt`:
   ```bash
   pip install -r requirements.txt
-
-### Setup Instructions
-Clone the repository:
-```
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
-
-Create and activate a virtual environment
-
-Install the required packages:
+- Install the required packages:
 ```pip install -r requirements.txt```
 
-### Data Preparation
+### 📂 Data Preparation
 The `data/` directory is organized as follows:
 
 ```
@@ -71,7 +60,7 @@ python calculate_fp.py
 
 This script is supported by the `fingerprints_xml/` folder, which contains the necessary fingerprint definitions.
 
-### Training and Evaluate the Model
+### 📈 Training and Evaluate the Model
 The training and evaluation process using the processed data includes the following steps:
 
 1. Divide the subset data for sampling
@@ -111,12 +100,12 @@ python pool_split.py
 ```
 This script separates the remaining pool data into a new folder for the next iteration.
 
-🔁 Repeat the steps above for each active learning iteration until the desired number of compounds or performance is achieved.
+Repeat the steps above for each active learning iteration until the desired number of compounds or performance is achieved.
 
-### Reproducing Results
+### 🔁 Reproducing Results
 To reproduce the results reported in the paper:
 
-1. Follow the setup and data preprocessing steps.
+1. Follow the requirements and data preprocessing steps.
 
 2. Run the training and evaluation scripts in sequence as described above.
 
