@@ -41,8 +41,8 @@ def split_y_pool(name, df, entropy_subset_df):
     remaining_y_pool.to_csv(os.path.join(name, "remaining_y_pool.csv"), index=False)
     print("y_pool split subset and remaining.")
 
-def split_data(large_filepath, large_filename, list_filepath, list_filename, output_path, filtered_list,remaining_list):
-    large_df = pd.read_csv(os.path.join(large_filepath, large_filename))        # Load the large data
+def split_data(large_filename, list_filepath, list_filename, output_path, filtered_list):
+    large_df = pd.read_csv(large_filename)        # Load the large data
     compound_list_df = pd.read_csv(os.path.join(list_filepath, list_filename))  # Load the compound list
 
     # Check if 'LigandID' columns are in both DataFrames
@@ -56,7 +56,7 @@ def split_data(large_filepath, large_filename, list_filepath, list_filename, out
     filtered_list_df = large_df[large_df['LigandID'].isin(compound_list_df['LigandID'])]
     # Save the filtered DataFrame to a new CSV file
     filtered_list_df.to_csv(os.path.join(output_path, filtered_list), index=False)
-
+    
     print("CSV files split generated successfully.")
 
 def merge_dataframes(file_paths, output_path, how='outer'):
@@ -67,32 +67,73 @@ def merge_dataframes(file_paths, output_path, how='outer'):
     df_merged.to_csv(output_path, index=False)      # Save the merged DataFrame to CSV
 
 def main():
-    name = "entropy1"
-    path_file = 'pool_pred/pool_1337'
-    df = pd.read_csv(os.path.join(name, 'meta_pool_cnn', 'y_prob_pool_average_cnn.csv'), index_col=0)
+    name = input("Enter the name of the directory (e.g., 'subset1'): ").strip()
+    path_file = 'data/initial_pool' #input("Enter the path to the pool prediction file (e.g., 'data/initial_pool'): ").strip()
+    training_file = 'data/x_train.csv'  #input("Enter the path to the training file (e.g., 'data/x_train.csv'): ").strip()
+    prev_subset = 'data/subsets/x_subset_1.csv' #input("Enter the path to the previous subset file (e.g., 'data/subsets/x_subset_1.csv'): ").strip()
+
+    # Step 1: Read probability file and calculate binary probabilities
+    prob_path = os.path.join(name, 'meta_pool_cnn', 'y_prob_pool_average_cnn.csv')
+    if not os.path.exists(prob_path):
+        print(f"File not found: {prob_path}")
+        return
+    df = pd.read_csv(prob_path, index_col=0)
     get_prob_0(name, df)
-    df = pd.read_csv(os.path.join(name, "y_prob_pool_average_cnn_binary.csv"), index_col=0)
+
+    # Step 2: Calculate entropy
+    binary_prob_path = os.path.join(name, "y_prob_pool_average_cnn_binary.csv")
+    if not os.path.exists(binary_prob_path):
+        print(f"File not found: {binary_prob_path}")
+        return
+    df = pd.read_csv(binary_prob_path, index_col=0)
     print(df.dtypes)
     entropy_sampling(name, df)
-    entropy_cal_file = pd.read_csv(os.path.join(name, "entropy_prob.csv"), index_col=0)
+
+    # Step 3: Sort by entropy and split
+    entropy_path = os.path.join(name, "entropy_prob.csv")
+    if not os.path.exists(entropy_path):
+        print(f"File not found: {entropy_path}")
+        return
+    entropy_cal_file = pd.read_csv(entropy_path, index_col=0)
     entropy_sort(name, entropy_cal_file, percentage=0.05)
-    y_pool = pd.read_csv(os.path.join(path_file, "y_pool.csv"))
-    entropy_subset_df = pd.read_csv(os.path.join(name, "entropy_subset.csv"))
+
+    # Step 4: Split y_pool based on entropy subset
+    y_pool_path = os.path.join(path_file, "y_pool.csv")
+    if not os.path.exists(y_pool_path):
+        print(f"File not found: {y_pool_path}")
+        return
+    y_pool = pd.read_csv(y_pool_path)
+    entropy_subset_path = os.path.join(name, "entropy_subset.csv")
+    if not os.path.exists(entropy_subset_path):
+        print(f"File not found: {entropy_subset_path}")
+        return
+    entropy_subset_df = pd.read_csv(entropy_subset_path)
     split_y_pool(name, y_pool, entropy_subset_df)
 
-    large_filepath = 'data'
-    large_filename = 'tpo_combine_process.csv'
+    # Step 5: Split x_train based on entropy subset
+    if not os.path.exists(training_file):
+        print(f"File not found: {training_file}")
+        return
     list_filepath = name
     list_filename = 'entropy_subset.csv'
     output_path = name
     filtered_list = 'x_subset_0.05.csv'
-    split_data(large_filepath, large_filename, list_filepath, list_filename, output_path, filtered_list)
-    
-    file_paths = [
-        os.path.join('entropy1/query_pool', 'x_subset.csv'),
-        os.path.join(name,'x_subset_0.05.csv')
-    ]
-    merge_dataframes(file_paths, os.path.join(name,'x_subset.csv'))
+    split_data(training_file, list_filepath, list_filename, output_path, filtered_list)
+
+    # Step 6: Merge with previous query pool if exists
+    new_subset = os.path.join(name, 'x_subset_0.05.csv')
+    merged_output = os.path.join(name, 'x_subset.csv')
+    file_paths = []
+    if os.path.exists(prev_subset):
+        file_paths.append(prev_subset)
+    if os.path.exists(new_subset):
+        file_paths.append(new_subset)
+    if file_paths:
+        merge_dataframes(file_paths, merged_output)
+        print(f"Merged x_subset.csv saved to {merged_output}")
+    else:
+        print("No files found to merge for x_subset.csv.")
+
     
 if __name__ == "__main__":
     main()

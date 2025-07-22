@@ -1,12 +1,10 @@
 import tensorflow.keras as keras
-from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import Input, Conv1D, MaxPooling1D, Dropout, Flatten, Dense
-from tensorflow.keras.layers import Input, Bidirectional, LSTM, Dropout, Reshape
-from keras.layers import Input, Dense, Attention
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dropout, Flatten, Dense
 import pandas as pd
 import numpy as np
 import os
-from sklearn.metrics import average_precision_score, precision_recall_curve, accuracy_score, confusion_matrix, f1_score, recall_score, roc_auc_score, balanced_accuracy_score, matthews_corrcoef, precision_score
+from sklearn.metrics import average_precision_score, accuracy_score, confusion_matrix, f1_score, recall_score, roc_auc_score, balanced_accuracy_score, matthews_corrcoef, precision_score
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
@@ -25,6 +23,22 @@ def cnn_model(fingerprint_length):
     return model
 
 def y_prediction(model, x_train_np, x_train, y_train, col_name):
+    '''
+    This function is to predict the y value using the trained model
+    and calculate the metrics
+    ------
+    Parameters:
+    model : The trained Keras model to make predictions.
+    x_train_np : The training data in numpy array format.
+    x_train : The training data in pandas DataFrame format.
+    y_train : The true labels for the training data.
+    col_name : The name of the column for which predictions are being made.
+    ------
+    Returns:
+    y_prob : DataFrame containing predicted probabilities.
+    y_pred_df : DataFrame containing predicted labels.
+    metrics : DataFrame containing various evaluation metrics.
+    '''
     y_prob = model.predict(x_train_np)
     y_pred = (y_prob > 0.5).astype(int).reshape(-1)
     print(y_train.shape)
@@ -64,6 +78,10 @@ def y_prediction(model, x_train_np, x_train, y_train, col_name):
     return y_prob, y_pred_df, metrics
 
 def y_prediction_average(y_prob, y_train, col_name):
+    '''
+    This function is to predict the y value using the average of predicted probabilities
+    and calculate the metrics
+    '''
     y_pred = (y_prob > 0.5).astype(int)
     print(y_train.shape)
     print(y_prob.shape)
@@ -99,7 +117,7 @@ def y_prediction_average(y_prob, y_train, col_name):
     
     return y_pred_df, metrics
 
-def meta_cnn_train(iteration_folder, name):
+def meta_cnn_train(iteration_folder, name, test_folder='data/test'):
     '''
     This function is to train the meta-model based CNN
     '''
@@ -124,7 +142,7 @@ def meta_cnn_train(iteration_folder, name):
     x4_test = pd.read_csv(os.path.join( iteration_folder, 'train_4', "all_stacked_test_prob.csv"  ), index_col=0)
     x5_test = pd.read_csv(os.path.join( iteration_folder, 'train_5', "all_stacked_test_prob.csv"  ), index_col=0)
     x6_test = pd.read_csv(os.path.join( iteration_folder, 'train_6', "all_stacked_test_prob.csv"  ), index_col=0)
-    y_test = pd.read_csv(os.path.join( 'test', "y_test.csv"  ), index_col=0)
+    y_test = pd.read_csv(os.path.join( test_folder, "y_test.csv"  ), index_col=0)
     
     x1_train_np = np.array(x1_train)
     x2_train_np = np.array(x2_train)
@@ -242,12 +260,21 @@ def meta_cnn_train(iteration_folder, name):
     metric_test.to_csv(os.path.join( name, "metric_test.csv"))
 
 def main():
-    for name in ['uncertain1/meta_average_cnn']:
-        print("#"*100) 
+    '''
+    This function is to train the meta-model based CNN
+    It prompts the user to input the iteration folder and subfolder names,
+    creates the necessary directories, and trains the CNN model for each subfolder.
+    '''
+    iteration_folder = input("Enter the iteration folder (e.g., subset1): ").strip()
+    subfolders = input("Enter subfolder names separated by commas (e.g., meta_average_cnn): ")
+    subfolder_list = [sf.strip() for sf in subfolders.split(",") if sf.strip()]
+    for subfolder in subfolder_list:
+        name = os.path.join(iteration_folder, subfolder)
+        os.makedirs(name, exist_ok=True)  # Automatically create the folder if it doesn't exist
+        print("#" * 100)
         print(name)
-        iteration_folder = 'uncertain1'
-        meta_cnn_train(iteration_folder, name)
+        meta_cnn_train(iteration_folder, name, test_folder='data/test')
         print("finish train ", name)
-        
+
 if __name__ == "__main__":
     main()

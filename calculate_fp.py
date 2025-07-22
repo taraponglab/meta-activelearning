@@ -5,7 +5,17 @@ from padelpy import padeldescriptor
 from glob import glob
 
 def convert_to_smi(df, folder_path='tpo',column='canonical_smiles'):
-    # Specify the path to your input CSV file
+    '''
+    Converts a DataFrame column containing SMILES strings to a .smi file.
+    ------
+    Parameters:
+    df : DataFrame
+        The DataFrame containing the chemical data.
+    folder_path : str
+        The directory where the output .smi file will be saved.
+    column : str
+        The name of the column in the DataFrame that contains the SMILES strings.
+    '''
     smiles_column = df[column]
     output_smi_file= os.path.join(folder_path,'smiles.smi')
     smiles_column.to_csv(output_smi_file, index=False, header=False)
@@ -13,10 +23,17 @@ def convert_to_smi(df, folder_path='tpo',column='canonical_smiles'):
     return output_smi_file
 
 def read_descriptor(folder_path = "fingerprints_xml"):
+    '''
+    Reads XML files from a specified folder and returns a list of fingerprint names
+    and a dictionary mapping them to their file paths.
+    ------
+    Parameters:
+    folder_path : str
+        The path to the folder containing the XML files for fingerprints.
+    '''
     xml_files = glob(os.path.join(folder_path, "*.xml"))
     xml_files.sort()
     xml_files
-    #set fingerprint list
     FP_list = [
      'AP2DC',
      'AD2D',
@@ -35,7 +52,17 @@ def read_descriptor(folder_path = "fingerprints_xml"):
     return FP_list, fp
 
 def calculate_fp(FP_list, df, output_smi_file, fp, fingerprint_output_dir='fingerprints/test'):
-    #Calculate fingerprints
+    '''
+    Calculates fingerprints for chemical compounds based on a given DataFrame.
+    ------
+    Parameters:
+    FP_list                : List of fingerprint names to be calculated.
+    df                     : DataFrame containing chemical data.
+    output_smi_file        : Path to the .smi file containing SMILES strings.
+    fp                     : Dictionary mapping fingerprint names to their XML file paths.
+    fingerprint_output_dir : Directory where the output fingerprint files will be saved.
+
+    '''
     for i in FP_list:
         fingerprint = i
         fingerprint_output_file = os.path.join(fingerprint_output_dir,''.join([fingerprint,'.csv']))

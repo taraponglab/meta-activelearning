@@ -92,7 +92,7 @@ def y_prediction(model, x_train_np, x_train, y_train, col_name):
     
     return y_prob, y_pred_df, metrics
 
-def stacked_class(name):
+def stacked_class(name, test_folder="data/test"):
 
     xat_train = pd.read_csv(os.path.join(name,  'AD2D.csv'     ), index_col=0)
     xes_train = pd.read_csv(os.path.join(name,  'EState.csv'   ), index_col=0)
@@ -108,19 +108,19 @@ def stacked_class(name):
     xma_train = pd.read_csv(os.path.join(name,  'MACCS.csv'    ), index_col=0)
     y_train   = pd.read_csv(os.path.join(name,  "y_train.csv"  ), index_col=0)
     
-    xat_test = pd.read_csv(os.path.join("test",  'AD2D.csv'     ), index_col=0)
-    xes_test = pd.read_csv(os.path.join("test",  'EState.csv'   ), index_col=0)
-    xke_test = pd.read_csv(os.path.join("test",  'KRFP.csv'     ), index_col=0)
-    xpc_test = pd.read_csv(os.path.join("test",  'PubChem.csv'  ), index_col=0)
-    xss_test = pd.read_csv(os.path.join("test",  'SubFP.csv'    ), index_col=0)
-    xcd_test = pd.read_csv(os.path.join("test",  'CDKGraph.csv' ), index_col=0)
-    xcn_test = pd.read_csv(os.path.join("test",  'CDK.csv'      ), index_col=0)
-    xkc_test = pd.read_csv(os.path.join("test",  'KRFPC.csv'    ), index_col=0)
-    xce_test = pd.read_csv(os.path.join("test",  'CDKExt.csv'   ), index_col=0)
-    xsc_test = pd.read_csv(os.path.join("test",  'SubFPC.csv'   ), index_col=0)
-    xac_test = pd.read_csv(os.path.join("test",  'AP2DC.csv'    ), index_col=0)
-    xma_test = pd.read_csv(os.path.join("test",  'MACCS.csv'    ), index_col=0)
-    y_test   = pd.read_csv(os.path.join("test",  "y_test.csv"   ), index_col=0)
+    xat_test = pd.read_csv(os.path.join(test_folder,  'AD2D.csv'     ), index_col=0)
+    xes_test = pd.read_csv(os.path.join(test_folder,  'EState.csv'   ), index_col=0)
+    xke_test = pd.read_csv(os.path.join(test_folder,  'KRFP.csv'     ), index_col=0)
+    xpc_test = pd.read_csv(os.path.join(test_folder,  'PubChem.csv'  ), index_col=0)
+    xss_test = pd.read_csv(os.path.join(test_folder,  'SubFP.csv'    ), index_col=0)
+    xcd_test = pd.read_csv(os.path.join(test_folder,  'CDKGraph.csv' ), index_col=0)
+    xcn_test = pd.read_csv(os.path.join(test_folder,  'CDK.csv'      ), index_col=0)
+    xkc_test = pd.read_csv(os.path.join(test_folder,  'KRFPC.csv'    ), index_col=0)
+    xce_test = pd.read_csv(os.path.join(test_folder,  'CDKExt.csv'   ), index_col=0)
+    xsc_test = pd.read_csv(os.path.join(test_folder,  'SubFPC.csv'   ), index_col=0)
+    xac_test = pd.read_csv(os.path.join(test_folder,  'AP2DC.csv'    ), index_col=0)
+    xma_test = pd.read_csv(os.path.join(test_folder,  'MACCS.csv'    ), index_col=0)
+    y_test   = pd.read_csv(os.path.join(test_folder,  "y_test.csv"   ), index_col=0)
     
     xat_train_np = np.array(xat_train)
     xes_train_np = np.array(xes_train)
@@ -486,7 +486,9 @@ def stacked_class(name):
     metric_test.to_csv(os.path.join( name, "metric_test.csv"))
 
 def main():
-    for name in ['margin1/train_1']: # Change according to running file
+    input_folders = input("Enter folder names separated by commas (e.g., subset1/train_1,subset1/train_2): ")
+    folder_list = [name.strip() for name in input_folders.split(",") if name.strip()]
+    for name in folder_list:
         print("#"*100) 
         print(name)
         y_train  = pd.read_csv(os.path.join(name, "y_train.csv"), index_col=0)
