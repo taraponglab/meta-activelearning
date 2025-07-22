@@ -37,11 +37,13 @@ This repository implements [Active Stack-Deep Learning] with Strategic Sampling 
 ### Data Preparation
 The `data/` directory is organized as follows:
 
+```
 data/
 ├── train/ # Training data
 ├── test/ # Testing data
 ├── subsets/ # Selected initial subsets
 └── pool/ # Remaining unlabeled compounds
+```
 
 To preprocess the data, run:
 
@@ -49,33 +51,37 @@ To preprocess the data, run:
 python preprocess.py
 ```
 ### Features Extraction
-The features extraction of twelve fingerprints calculated with python file:The extraction of twelve molecular fingerprints is performed using the following script:
+The features extraction of twelve fingerprints calculated with python file: The extraction of twelve molecular fingerprints is performed using the following script:
 
 python calculate_fp.py
 
-This script is supported by the fingerprints_xml/ folder, which contains the necessary fingerprint definitions.
+This script is supported by the `fingerprints_xml/` folder, which contains the necessary fingerprint definitions.
 
 ### Training and Evaluate the Model
 The training and evaluation process using the processed data includes the following steps:
+
 1. Divide the subset data for sampling
 Run:
 ```
 python divide_sampling.py
 ```
 This will generate multiple k-ratio subset samplings saved in one folder.
-3. Train models on subset samplings
+
+2. Train models on subset samplings
 Run:
 ```
 python train_meta_sampling.py
 ```
 This script trains models on each subset sampling.
-4. Train the stacking ensemble and evaluate
+
+3. Train the stacking ensemble and evaluate
 Run:
 ```
 python train_average_probability.py
 ```
 This trains a CNN-based stacking ensemble on the subsets. The average predictions are calculated and the evaluation results are saved as a CSV file.
-5. Apply active learning selection strategies
+
+4. Apply active learning selection strategies
 You can run one of the following, depending on the desired strategy:
 ```
 python entropy_cal.py
@@ -83,7 +89,8 @@ python margin_cal.py
 python uncertainty_cal.py
 ```
 These scripts select new compounds from the pool based on entropy, margin, or uncertainty, and generate updated subset and pool files.
-6. Split the pool dataset
+
+5. Split the pool dataset
 Run:
 ```
 python pool_split.py
