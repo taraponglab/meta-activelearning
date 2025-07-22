@@ -31,8 +31,22 @@ This repository implements [Active Stack-Deep Learning] with Strategic Sampling 
 - Performance evaluation
 
 ### Requirements
+- Python >= 3.8
+- Install dependencies from `requirements.txt`:
+  ```bash
+  pip install -r requirements.txt
 
 ### Setup Instructions
+Clone the repository:
+```
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+Create and activate a virtual environment
+
+Install the required packages:
+```pip install -r requirements.txt```
 
 ### Data Preparation
 The `data/` directory is organized as follows:
@@ -106,7 +120,7 @@ To reproduce the results reported in the paper:
 
 2. Run the training and evaluation scripts in sequence as described above.
 
-3. The outputs and evaluation results will be saved in the appropriate results folders.
+3. The outputs and evaluation results will be saved in the specified folders.
 
 ### MIT License
 Copyright (c) [2025] [Dr.Tarapong Srisongram]
