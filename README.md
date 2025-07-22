@@ -32,11 +32,9 @@ This repository implements Active Stack-Deep Learning with Strategic Sampling fo
 
 
 ### Requirements
-- Install dependencies from `requirements.txt`:
-  ```bash
-  pip install -r requirements.txt
-- Install the required packages:
-```pip install -r requirements.txt```
+Install dependencies from `requirements.txt`:
+```bash
+pip install -r requirements.txt
 
 
 ### Data Preparation
