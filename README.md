@@ -35,7 +35,7 @@ This repository implements Active Stack-Deep Learning with Strategic Sampling fo
 Install dependencies from `requirements.txt`:
 ```bash
 pip install -r requirements.txt
-
+```
 
 ### Data Preparation
 The `data/` directory is organized as follows:
