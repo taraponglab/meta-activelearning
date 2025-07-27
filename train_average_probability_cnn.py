@@ -122,12 +122,12 @@ def meta_cnn_train(iteration_folder, name, test_folder='data/test'):
     This function is to train the meta-model based CNN
     '''
     
-    x1_train = pd.read_csv(os.path.join( iteration_folder, 'train_1', "all_stacked_train_prob.csv"  ), index_col=0)
-    x2_train = pd.read_csv(os.path.join( iteration_folder, 'train_2', "all_stacked_train_prob.csv"  ), index_col=0)
-    x3_train = pd.read_csv(os.path.join( iteration_folder, 'train_3', "all_stacked_train_prob.csv"  ), index_col=0)
-    x4_train = pd.read_csv(os.path.join( iteration_folder, 'train_4', "all_stacked_train_prob.csv"  ), index_col=0)
-    x5_train = pd.read_csv(os.path.join( iteration_folder, 'train_5', "all_stacked_train_prob.csv"  ), index_col=0)
-    x6_train = pd.read_csv(os.path.join( iteration_folder, 'train_6', "all_stacked_train_prob.csv"  ), index_col=0)
+    x1_train = pd.read_csv(os.path.join( iteration_folder, 'train_1', "all_stacked_train_oof.csv"  ), index_col=0)
+    x2_train = pd.read_csv(os.path.join( iteration_folder, 'train_2', "all_stacked_train_oof.csv"  ), index_col=0)
+    x3_train = pd.read_csv(os.path.join( iteration_folder, 'train_3', "all_stacked_train_oof.csv"  ), index_col=0)
+    x4_train = pd.read_csv(os.path.join( iteration_folder, 'train_4', "all_stacked_train_oof.csv"  ), index_col=0)
+    x5_train = pd.read_csv(os.path.join( iteration_folder, 'train_5', "all_stacked_train_oof.csv"  ), index_col=0)
+    x6_train = pd.read_csv(os.path.join( iteration_folder, 'train_6', "all_stacked_train_oof.csv"  ), index_col=0)
     
     y1_train = pd.read_csv(os.path.join( iteration_folder, 'train_1',   "y_train.csv"  ), index_col=0)
     y2_train = pd.read_csv(os.path.join( iteration_folder, 'train_2',   "y_train.csv"  ), index_col=0)
@@ -266,7 +266,7 @@ def main():
     creates the necessary directories, and trains the CNN model for each subfolder.
     '''
     iteration_folder = input("Enter the iteration folder (e.g., subset1): ").strip()
-    subfolders = input("Enter subfolder names separated by commas (e.g., meta_average_cnn): ")
+    subfolders = 'meta_average_cnn' #input("Enter subfolder names separated by commas (e.g., meta_average_cnn): ")
     subfolder_list = [sf.strip() for sf in subfolders.split(",") if sf.strip()]
     for subfolder in subfolder_list:
         name = os.path.join(iteration_folder, subfolder)
