@@ -1,4 +1,4 @@
-# **Active Stack-Deep Learning with Strategic Sampling for Small and Imbalance Chemical Toxicity Prediciton**
+# **Active Stacking-Deep Learning with Strategic Sampling for Small and Imbalanced Chemical Toxicity Prediciton**
 
 ![Sample Figure](graphic_abstract.png)
 
@@ -32,7 +32,10 @@ This repository implements Active Stack-Deep Learning with Strategic Sampling fo
 
 
 ### Requirements
-Install dependencies from `requirements.txt`:
+1. Create a virtual environment
+Create a virtual environment with Python 3.11.
+
+2. Install dependencies from `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 ```
@@ -73,21 +76,40 @@ python divide_sampling.py
 ```
 This will generate multiple k-ratio subset samplings saved in one folder.
 
-2. Train models on subset samplings
+2. Train models on subset samplings + OOF predictions
 Run:
 ```
 python train_meta_sampling.py
+python train_meta_sampling_oof.py
 ```
 This script trains models on each subset sampling.
 
 3. Train the stacking ensemble and evaluate
+You can run one of the following, depending on the desired model:
 Run:
 ```
-python train_average_probability.py
+python train_average_probability_att.py
+python train_average_probability_bilstm.py
+python train_average_probability_cnn.py
 ```
 This trains a CNN-based stacking ensemble on the subsets. The average predictions are calculated and the evaluation results are saved as a CSV file.
 
-4. Apply active learning selection strategies
+4. Split the pool data set
+Run:
+```
+python pool_split.py
+```
+This script separates the remaining pool data into a new folder for the next iteration.
+
+5. Predict pool data set
+Run:
+```
+python pool_pred_sampling.py
+python pool_pred_average.py
+```
+This script predicts the remaining pool data.
+
+6. Apply active learning selection strategies to the pool data
 You can run one of the following, depending on the desired strategy:
 ```
 python entropy_cal.py
@@ -95,13 +117,6 @@ python margin_cal.py
 python uncertainty_cal.py
 ```
 These scripts select new compounds from the pool based on entropy, margin, or uncertainty, and generate updated subset and pool files.
-
-5. Split the pool dataset
-Run:
-```
-python pool_split.py
-```
-This script separates the remaining pool data into a new folder for the next iteration.
 
 Repeat the steps above for each active learning iteration until the desired number of compounds or performance is achieved.
 
