@@ -33,9 +33,11 @@ This repository implements Active Stack-Deep Learning with Strategic Sampling fo
 
 ### Requirements
 1. Create a virtual environment
+
 Create a virtual environment with Python 3.11.
 
 2. Install dependencies from `requirements.txt`:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -70,6 +72,7 @@ This script is supported by the `fingerprints_xml/` folder, which contains the n
 The training and evaluation process using the processed data includes the following steps:
 
 1. Divide the subset data for sampling
+
 Run:
 ```
 python divide_sampling.py
@@ -77,6 +80,7 @@ python divide_sampling.py
 This will generate multiple k-ratio subset samplings saved in one folder.
 
 2. Train models on subset samplings + OOF predictions
+
 Run:
 ```
 python train_meta_sampling.py
@@ -85,7 +89,9 @@ python train_meta_sampling_oof.py
 This script trains models on each subset sampling.
 
 3. Train the stacking ensemble and evaluate
+
 You can run one of the following, depending on the desired model:
+
 Run:
 ```
 python train_average_probability_att.py
@@ -95,6 +101,7 @@ python train_average_probability_cnn.py
 This trains a CNN-based stacking ensemble on the subsets. The average predictions are calculated and the evaluation results are saved as a CSV file.
 
 4. Split the pool data set
+
 Run:
 ```
 python pool_split.py
@@ -102,6 +109,7 @@ python pool_split.py
 This script separates the remaining pool data into a new folder for the next iteration.
 
 5. Predict pool data set
+
 Run:
 ```
 python pool_pred_sampling.py
@@ -110,6 +118,7 @@ python pool_pred_average.py
 This script predicts the remaining pool data.
 
 6. Apply active learning selection strategies to the pool data
+
 You can run one of the following, depending on the desired strategy:
 ```
 python entropy_cal.py
